@@ -1,6 +1,3 @@
-import ast
-import sys
-
 class HMM:
     states = []
     symbols = []
@@ -76,41 +73,40 @@ class HMM:
         return s.split(' ')
 
     def calculateAlphaFirst(self):
+        """
+        Calculate the alpha1 for the first character of the string
+        :return:
+        """
         if (len(self.initProbabilities) > 0 and len(self.emissionProbabilities) > 0):
             print "Calculating initial probabilities"
             for i in range(0, len(self.states)):
-                self.alpha.append(ast.literal_eval(self.initProbabilities[i]) * ast.literal_eval(self.emissionProbabilities[i][0]))
-            print "I: ", self.initProbabilities, "E: " , self.emissionProbabilities
-            print "alphaF: ", self.alpha
+                self.alpha.append(float(self.initProbabilities[i]) * float(self.emissionProbabilities[i][0]))
+            print "alpha1\t:", self.alpha
 
     def calculateAlpha(self):
+        """
+        Calculate the values of alpha from the 2nd character to the end of the string.
+        :return:
+        """
         for c in range(1, len(self.string)):
             m = []
             for j in range(0, len(self.states)):
                 mul = 0
                 for i in range(0, len(self.states)):
-                    # print "alpha", j, i
-                    # print self.string[c-1]
-                    # print self.symbols.index(self.string[c-1])
-                    # print "============="
-                    # print i+1,j+1, "T|", self.transitionProbabilites[i][j]
-                    # print j+1,'X', "E|", self.emissionProbabilities[j][self.symbols.index(self.string[c-1])]
-                    # print '1', j+1, self.alpha[i]
-
-                    mul += float(self.transitionProbabilites[i][j]) * float(self.emissionProbabilities[j][self.symbols.index(self.string[c-1])]) * float(self.alpha[i])
-                    # print mul
-                    # print "=============="
+                    mul += float(self.transitionProbabilites[i][j]) * float(self.emissionProbabilities[j][self.symbols.index(self.string[c])]) * float(self.alpha[i])
                 m.append(mul)
-            print m
+            print "alpha%d\t:" %(c+1), m
             self.alpha = m
         return self.alpha
-        # # print self.alpha
-        # print "Alpha: ", self.alpha
-        # print "Final Probability:", sum(self.alpha)
-        # print "Result: ", len(self.symbols-1), (self.alpha)[str(len(self.symbols)-1)]
-
 
     def observationProbability(self):
+        """
+        Returns the observation probability.
+        :return:
+        """
+        print "String: ", self.string
+        print "Initial Probabilities: ", self.initProbabilities, "\nEmission Probabilities: " , self.emissionProbabilities
+        print "Transition Probabilities: ", self.transitionProbabilites
         self.calculateAlphaFirst()
         self.calculateAlpha()
-        return sum(self.alpha)
+        print "Observation Probability: ", sum(self.alpha)

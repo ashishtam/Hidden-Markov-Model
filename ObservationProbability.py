@@ -17,25 +17,25 @@
 
 import HiddenMarkovModel as hmm
 
-# s = "xzyyzzyzyy"
-# states = "A B"
-# symbols = "x y z"
-# initP = "0.5 0.5"
-# transP = "0.303 0.697 " \
-#         "0.831 0.169"
-# emisP = "0.533 0.065 0.402 " \
-#         "0.342 0.334 0.324"
-
-s = "xxz"
-states = "S1 S2 S3"
+s = "xzyyzzyzyy"
+states = "A B"
 symbols = "x y z"
-initP = "0.5 0.5 0"
-transP = "0 0.333 0.667 " \
-        "0.333 0 0.667 " \
-        "0.333 0.333 0.333"
-emisP = "0.5 0.5 0 " \
-        "0 0.5 0.5 " \
-        "0.5 0 0.5"
+initP = "0.5 0.5"
+transP = "0.303 0.697 " \
+        "0.831 0.169"
+emisP = "0.533 0.065 0.402 " \
+        "0.342 0.334 0.324"
+
+# s = "xxz"
+# states = "S1 S2 S3"
+# symbols = "x y z"
+# initP = "0.5 0.5 0"
+# transP = "0 0.333 0.667 " \
+#         "0.333 0 0.667 " \
+#         "0.333 0.333 0.333"
+# emisP = "0.5 0.5 0 " \
+#         "0 0.5 0.5 " \
+#         "0.5 0 0.5"
 
 h = hmm.HMM(s, states, symbols, initP, transP, emisP)
-print "Observation Probability: ", h.observationProbability()
+h.observationProbability()
