@@ -20,7 +20,7 @@ class HMM:
         :param x: string
         :return: void
         """
-        self.string = x;
+        self.string = x
 
     def setStates(self, states):
         """
