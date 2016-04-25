@@ -102,7 +102,6 @@ class HMM:
     def observationProbability(self):
         """
         Returns the observation probability.
-        :return:
         """
         print "String: ", self.string
         print "Initial Probabilities: ", self.initProbabilities, "\nEmission Probabilities: " , self.emissionProbabilities
